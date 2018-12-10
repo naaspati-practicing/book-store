@@ -1,0 +1,8 @@
+/bin/
+/.gradle/
+/build/
+*.class
+
+*.jar
+logging-not-allowed.txt
+allowed-logger-names.txt

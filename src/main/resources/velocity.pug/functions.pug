@@ -1,0 +1,4 @@
+- proxy = name => new Proxy({}, {get(context, prop) { return `\$${name}['${prop}']`;  }})
+- msg = proxy('msg')
+- paths = proxy('paths')
+- getter = name => new Proxy({}, {get(context, prop) { return `\${${name}.${prop[0].toUpperCase()+prop.substring(1)}}`; }})

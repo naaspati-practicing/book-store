@@ -1,0 +1,56 @@
+include functions.pug
+| #macro(mainLayout)
+|
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title!= msg['COMMON_TITLE'] 
+        link(rel="stylesheet", href="/styles.css")
+    body
+      header
+        nav
+          mixin link(key, text)
+             a(href=`${paths[key]}`)= text
+               if block
+                 block
+          +link('HOME')
+            img#logo(src="/img/logo.png", alt="Spark Library")
+          ul#choose_lang
+            form
+                mixin lang_button(value, icon)
+                  li
+                    button(name='locale', value, style=`background-image: url('/img/${icon}');`)
+                +lang_button('de', 'german.png')
+                +lang_button('en', 'english.png')
+          
+          ul#menu
+            li
+              +link('BOOKS', msg['COMMON_NAV_ALLBOOKS']) 
+            li
+              = msg['HELLO']
+              | #if($current_user)
+              | $current_user!
+              | #else
+              | Guest!
+              | #end
+              form(method="post", action=`#if($current_user)${paths['LOGOUT']}#else${paths['LOGIN']}#end`)
+                input(type="hidden", name='request_url', value=`$request_url`)
+                |
+                | #if($current_user)
+                button#logout= msg['COMMON_NAV_LOGOUT']
+                |
+                | #else
+                button#login= msg['COMMON_NAV_LOGIN']
+                |
+                | #end
+              
+              
+      main
+        #content
+          | $bodyContent
+      footer= msg['COMMON_FOOTER_TEXT']
+|        
+| #end

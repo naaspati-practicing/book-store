@@ -1,0 +1,50 @@
+#macro(mainLayout)
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>$msg['COMMON_TITLE']</title>
+    <link rel="stylesheet" href="/styles.css"/>
+  </head>
+  <body>
+    <header>
+      <nav><a href="$paths['HOME']"><img id="logo" src="/img/logo.png" alt="Spark Library"/></a>
+        <ul id="choose_lang">
+          <form>
+                        <li>
+                          <button name="locale" value="value" style="background-image: url('/img/german.png');"></button>
+                        </li>
+                        <li>
+                          <button name="locale" value="value" style="background-image: url('/img/english.png');"></button>
+                        </li>
+          </form>
+        </ul>
+        <ul id="menu">
+          <li><a href="$paths['BOOKS']">$msg['COMMON_NAV_ALLBOOKS'] </a>
+          </li>
+          <li>$msg['HELLO']#if($current_user)
+            $current_user!
+            #else
+            Guest!
+            #end
+            <form method="post" action="#if($current_user)$paths['LOGOUT']#else$paths['LOGIN']#end">
+              <input type="hidden" name="request_url" value="$request_url"/>
+              #if($current_user)
+              <button id="logout">$msg['COMMON_NAV_LOGOUT']</button>
+              #else
+              <button id="login">$msg['COMMON_NAV_LOGIN']</button>
+              #end
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div id="content">$bodyContent</div>
+    </main>
+    <footer>$msg['COMMON_FOOTER_TEXT']</footer>
+  </body>
+</html>       
+#end

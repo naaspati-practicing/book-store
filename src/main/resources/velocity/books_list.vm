@@ -1,0 +1,12 @@
+#parse('velocity/layout.vm')
+#@mainLayout()
+ 
+<h1>$msg['BOOKS_HEADING_ALL']</h1>
+<div id="books_list">
+   #foreach($book in $books)
+  <div class="col"><a class="book" href="$paths['BOOK_BY_ISBN']${book.Isbn}">
+      <div class="bookCover"><img src="$bookUtils.mediumCover($book)" alt="${book.Title}"/></div>$formatter.format($msg['BOOKS_CAPTION'], $book.Title, $book.Author)</a></div>
+  #end
+  
+</div>
+#end

@@ -1,0 +1,19 @@
+include functions.pug
+
+| #parse('velocity/layout.vm')
+| #@mainLayout()
+| 
+| #if($book)
+- book = getter('book');
+h1=book.title
+h2=book.author
+.book
+  .bookCover
+    img(src="$bookUtils.largeCover($book)", alt=`${book.title}`)
+|
+| #else
+h1= msg['BOOKS_BOOK_NOT_FOUND']
+|
+| #end
+|
+| #end

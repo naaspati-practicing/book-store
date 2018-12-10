@@ -1,0 +1,19 @@
+include functions.pug
+
+| #parse('velocity/layout.vm')
+| #@mainLayout()
+| 
+h1= msg['BOOKS_HEADING_ALL']
+- book = getter('book');
+#books_list 
+  | #foreach($book in $books)
+  .col
+    a.book(href=`${paths['BOOK_BY_ISBN']}${book.isbn}`)
+      .bookCover
+        img(src="$bookUtils.mediumCover($book)", alt=`${book.title}`)
+      | $formatter.format($msg['BOOKS_CAPTION'], $book.Title, $book.Author)
+  |
+  | #end
+  |
+|
+| #end

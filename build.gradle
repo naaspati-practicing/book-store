@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+repositories {
+    jcenter()
+}
+
+mainClassName = 'sam.main.Main'
+
+
+ext.SPARK_VERSION = '2.7.2'
+
+dependencies {
+  compile 'com.sparkjava:spark-core:'+SPARK_VERSION
+  compile 'com.sparkjava:spark-template-velocity:2.7.+'
+  compile 'org.slf4j:slf4j-jdk14:1.7.25'
+  // compile 'com.j2html:j2html:1.2.2'
+  compile 'org.json:json:20180813'
+}
+
+
+run {
+    standardInput = System.in
+    systemProperties['java.util.logging.config.file'] = 'logging.properties'
+}
+
+jar  {
+  exclude 'velocity.pug'
+}
